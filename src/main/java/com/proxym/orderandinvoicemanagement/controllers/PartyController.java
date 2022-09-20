@@ -2,7 +2,6 @@ package com.proxym.orderandinvoicemanagement.controllers;
 
 
 import com.proxym.orderandinvoicemanagement.dto.PartyDTO;
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
 import com.proxym.orderandinvoicemanagement.services.Implementations.PartyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +23,28 @@ public class PartyController {
         return ResponseEntity.ok().body(partyService.getAll());
     }
 
-    @GetMapping("/{partyName}/details")
-    public ResponseEntity<PartyDTO> getPartyByName(@PathVariable String partyName) throws Exception {
-        return  ResponseEntity.ok().body(partyService.getPartyByName(partyName));
+    @GetMapping("/{partyId}")
+    public ResponseEntity<PartyDTO> getPartyByTechnicalId(@PathVariable String partyId) {
+        return  ResponseEntity.ok().body(partyService.getPartyById(partyId));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<PartyDTO> createParty(@RequestBody PartyDTO partyDTO) throws Exception {
+    public ResponseEntity<PartyDTO> createParty(@RequestBody PartyDTO partyDTO)  {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/parties/add").toUriString());
         return ResponseEntity.created(uri).body(partyService.createParty(partyDTO));
     }
 
-    @PostMapping("/{partyName}/update")
-    public ResponseEntity<PartyDTO> updateParty(@PathVariable String partyName,@RequestBody PartyDTO partyDTO) throws Exception {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/parties/{partyName}/update").toUriString());
-        return ResponseEntity.created(uri).body(partyService.updateParty(partyName,partyDTO));
+    @PostMapping("/update/{partyId}")
+    public ResponseEntity<PartyDTO> updateParty(@PathVariable String partyId,@RequestBody PartyDTO partyDTO) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/parties/{partyId}/update").toUriString());
+        return ResponseEntity.created(uri).body(partyService.updateParty(partyId,partyDTO));
     }
 
+    @GetMapping("/delete/{partyId}")
+    public ResponseEntity<?> deleteParty(@PathVariable String partyId){
+        partyService.deleteParty(partyId);
+        return ResponseEntity.ok("Party with Id " + partyId + "is removed successfully");
+    }
 
 
 }

@@ -11,8 +11,7 @@ import java.util.Optional;
 
 public interface PartyRepository extends MongoRepository<Party, String> {
 
-    //Be careful of case sensitivity
-    Optional<Party> findPartyByPartyName(PartyName partyName);
+    Optional<Party> findPartyByTechnicalId(String id);
     Boolean existsByPartyName(PartyName partyName);
     Boolean existsByPartyIdentification(PartyIdentification id);
 

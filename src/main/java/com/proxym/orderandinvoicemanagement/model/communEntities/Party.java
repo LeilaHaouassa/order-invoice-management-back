@@ -41,5 +41,4 @@ public class  Party {
     //"The financial account associated with this party."
     private FinancialAccount financialAccount ;
 
-
 }
