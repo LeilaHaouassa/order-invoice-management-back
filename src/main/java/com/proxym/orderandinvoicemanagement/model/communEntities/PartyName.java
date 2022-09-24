@@ -12,14 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 //"The name of the party."
 @Data
 @NoArgsConstructor  //for model mapping
-@AllArgsConstructor   // for builder
+//@AllArgsConstructor   // for builder
 @Builder
-@Document
 public class PartyName {
-    @Id
-    private String technicalId;
 
-    @Indexed(unique = true)
     private TextType name;
 
     public PartyName(TextType partyName) {

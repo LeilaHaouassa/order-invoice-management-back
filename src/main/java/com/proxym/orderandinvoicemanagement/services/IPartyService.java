@@ -1,12 +1,10 @@
 package com.proxym.orderandinvoicemanagement.services;
 
-import com.proxym.orderandinvoicemanagement.dto.PartyDTO;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
 import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
-import com.proxym.orderandinvoicemanagement.model.communEntities.PartyIdentification;
-import com.proxym.orderandinvoicemanagement.model.communEntities.PartyName;
 
 import java.util.List;
 import java.util.Set;
@@ -24,14 +22,6 @@ import java.util.Set;
      PartyDTO updateParty(String id, PartyDTO partyDTO) throws ResourceNotFoundException,IllegalArgumentException;
 
      Set<PartyDTO> convertListToDTO(List<Party> list);
-
-     Boolean existsByPartyName(TextType name);
-
-     Boolean existsByPartyIdentification(IdentifierType id);
-
-     Boolean checkIfPartyNameTaken(PartyDTO partyDTO);
-
-     Boolean checkIfPartyIdentificationTaken(PartyDTO partyDTO);
 
      void deleteParty(String id) throws ResourceNotFoundException;
 }

@@ -5,13 +5,23 @@ import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
 import com.proxym.orderandinvoicemanagement.model.communEntities.CustomerParty;
 import com.proxym.orderandinvoicemanagement.model.communEntities.SupplierParty;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
 import java.util.Set;
 
 //"A document used to cancel an entire Order."
+@Document
+@Data
 public class OrderCancellation {
+    @Id
+    private String technicalId;
+
     //Required
+    @Indexed(unique = true)
     private IdentifierType id;
 
     //Required

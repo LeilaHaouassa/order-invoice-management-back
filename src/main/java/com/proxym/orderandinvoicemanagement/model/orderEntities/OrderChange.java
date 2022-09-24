@@ -2,20 +2,33 @@ package com.proxym.orderandinvoicemanagement.model.orderEntities;
 
 import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
+import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
 import com.proxym.orderandinvoicemanagement.model.communEntities.CustomerParty;
 import com.proxym.orderandinvoicemanagement.model.communEntities.MonetaryTotal;
 import com.proxym.orderandinvoicemanagement.model.communEntities.SupplierParty;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Document
+@Data
 public class OrderChange {
+    @Id
+    private String technicalId;
 
+    @Indexed(unique = true)
     private IdentifierType id;
 
     //Required
     //"The date, assigned by the sender, on which this document was issued.",
     private DateType issueDate ;
+
+    //"The time, assigned by the sender, on which this document was issued.",
+    private TimeType issueTime ;
 
 
     //Required
@@ -26,8 +39,8 @@ public class OrderChange {
 
 
     //Required
-    //"A reference to the Order being changed.
-    private Set<OrderReference> orderReference = new HashSet<>();
+    //A reference to the Order being changed.
+    private OrderReference orderReference;
 
 
     //Required

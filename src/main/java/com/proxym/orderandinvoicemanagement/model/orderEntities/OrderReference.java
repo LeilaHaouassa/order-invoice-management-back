@@ -8,9 +8,13 @@ package com.proxym.orderandinvoicemanagement.model.orderEntities;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
+import org.springframework.data.annotation.Id;
 
 //"A class to define a reference to an Order."
 public class OrderReference {
+
+    //Id of referenced order
+    private String technicalId;
 
     //Required
     //"An identifier for this order reference, assigned by the buyer."

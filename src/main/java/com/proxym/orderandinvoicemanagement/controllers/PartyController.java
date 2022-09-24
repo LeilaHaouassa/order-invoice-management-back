@@ -1,8 +1,8 @@
 package com.proxym.orderandinvoicemanagement.controllers;
 
 
-import com.proxym.orderandinvoicemanagement.dto.PartyDTO;
-import com.proxym.orderandinvoicemanagement.services.Implementations.PartyServiceImpl;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
+import com.proxym.orderandinvoicemanagement.services.IPartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.Set;
 @RequestMapping("api/v1/parties")
 public class PartyController {
     @Autowired
-    private PartyServiceImpl partyService;
+    private IPartyService partyService;
 
     @GetMapping
     public ResponseEntity<Set<PartyDTO>> getAllParties(){

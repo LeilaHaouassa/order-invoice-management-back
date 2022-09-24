@@ -1,14 +1,16 @@
 package com.proxym.orderandinvoicemanagement.model.baseEntities;
 
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 //"One calendar day according the Gregorian calendar."
 @Data
+@Builder
 public class DateType {
     //@Pattern(regexp="^-*[^T:-]+-[^T:]+$")
-    @DateTimeFormat
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String dateContent;
 }
 
@@ -18,7 +20,7 @@ public class DateType {
 //"allOf": [
 //        {
 //        "type": "string",
-//        "format": "date-time"   YYYY:MM::DDThh:mm:ss.sTZD
+//        "format": "date-time"   YYYY:MM::DDThh:mm:ss.sTZD  yyyy-MM-dd'T'HH:mm:ss.SSSXXX
 //        },
 //        {
 //        "type": "string",

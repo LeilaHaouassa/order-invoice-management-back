@@ -1,4 +1,4 @@
-package com.proxym.orderandinvoicemanagement.dto;
+package com.proxym.orderandinvoicemanagement.dto.commun;
 
 import com.proxym.orderandinvoicemanagement.model.baseEntities.CodeType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;

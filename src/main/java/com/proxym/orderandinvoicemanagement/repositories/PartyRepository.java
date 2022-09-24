@@ -4,7 +4,6 @@ import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
 import com.proxym.orderandinvoicemanagement.model.communEntities.PartyIdentification;
 import com.proxym.orderandinvoicemanagement.model.communEntities.PartyName;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 

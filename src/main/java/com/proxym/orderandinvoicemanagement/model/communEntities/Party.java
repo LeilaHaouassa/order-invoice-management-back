@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -27,9 +28,11 @@ public class  Party {
 
     //"An identifier for this party."
     //Originally a Party has a list of PartyIdentification
+    @Indexed(unique = true)
     private PartyIdentification partyIdentification;
 
     //"A name for this party."
+    @Indexed(unique = true)
     private PartyName partyName;
 
     //"The party's postal address."

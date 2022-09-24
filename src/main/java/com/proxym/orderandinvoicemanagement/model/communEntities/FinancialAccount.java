@@ -13,8 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor  //for model mapping
 public class FinancialAccount {
-    @Id
-    private String technicalId;
 
     //"The identifier for this financial account; the bank account number."
     private IdentifierType id;

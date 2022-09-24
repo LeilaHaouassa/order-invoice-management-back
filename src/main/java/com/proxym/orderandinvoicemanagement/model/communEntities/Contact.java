@@ -10,11 +10,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
 @NoArgsConstructor  //for model mapping
 public class Contact {
-    @Id
-    private String technicalId;
 
     private IdentifierType id;
 

@@ -11,14 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 //"A class to define an identifier for a party."
 @Data
-@Document
 @NoArgsConstructor  //for model mapping
-@AllArgsConstructor
+//@AllArgsConstructor
 @Builder
 public class PartyIdentification {
 
-    @Id
-    private String technicalId;
 
     //"An identifier for the party."
     private IdentifierType id ;

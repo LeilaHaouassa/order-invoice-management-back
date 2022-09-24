@@ -12,11 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 //"A class to define common information related to an address."
 @Data
 @NoArgsConstructor  //for model mapping
-@Document
 public class Address {
-
-    @Id
-    private String technicalId;
 
     //"An identifier for this address within an agreed scheme of address identifiers.",
     private IdentifierType id;
