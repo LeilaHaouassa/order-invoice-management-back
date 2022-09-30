@@ -1,9 +1,7 @@
 package com.proxym.orderandinvoicemanagement.repositories;
 
-import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.Order;
-import org.springframework.data.mongodb.core.aggregation.BooleanOperators;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
@@ -13,7 +11,7 @@ public interface OrderRepository extends MongoRepository<Order,String> {
 
     Optional<Order> findByTechnicalId(String technicalId);
 
-    Set<Order> findAllByBuyerCustomerParty_Party(Party party);
+    Set<Order> findAllByBuyerCustomerParty_Party_TechnicalId(String technicalId);
 
-    Set<Order> findAllBySellerSupplierParty_Party(Party party);
+    Set<Order> findAllBySellerSupplierParty_Party_TechnicalId(String technicalId);
 }

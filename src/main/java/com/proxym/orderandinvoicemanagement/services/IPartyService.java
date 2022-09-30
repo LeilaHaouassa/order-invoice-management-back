@@ -2,9 +2,7 @@ package com.proxym.orderandinvoicemanagement.services;
 
 import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
-import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
-import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
 
 import java.util.List;
 import java.util.Set;

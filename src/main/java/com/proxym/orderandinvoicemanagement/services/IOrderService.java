@@ -29,4 +29,5 @@ public interface IOrderService {
     Order getOrderByTechnicalId(String technicalId) throws ResourceNotFoundException;
 
     Order getOrderIfOperationIsLegal(String technicalId) throws IllegalOperationException;
+
 }

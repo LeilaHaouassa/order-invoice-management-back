@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class SupplierPartyDTO {
-    private String technicalId;
-    private PartyDTO party;
+    private PartyRefDTO party;
 }

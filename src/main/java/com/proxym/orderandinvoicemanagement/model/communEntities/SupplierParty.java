@@ -1,17 +1,15 @@
 package com.proxym.orderandinvoicemanagement.model.communEntities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.PartyRef;
+import lombok.Data;
 
 //"A class to describe a supplier party."
-@Document
+@Data
 public class SupplierParty {
 
-    @Id
-    private String technicalId;
-
     //"The supplier party itself."
-    private Party party;
+    private PartyRef party;
 }
 
 

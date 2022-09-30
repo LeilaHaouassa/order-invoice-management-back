@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 //Must implement singleton design pattern bcz it doesn't make sense there are many settings documents
 public class Settings {
-    @Id
-    private String id;
+
+    private String id = "1ID";
 
     private Boolean responseToBuyerIsRequiredWhenAcceptingOrder;
 }

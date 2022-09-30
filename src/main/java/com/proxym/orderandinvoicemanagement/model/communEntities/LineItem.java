@@ -2,16 +2,13 @@ package com.proxym.orderandinvoicemanagement.model.communEntities;
 
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.QuantityType;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Item.Item;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Item.ItemRef;
+import lombok.Data;
 
 //"A class to describe a line item."
-@Document
+@Data
 public class LineItem {
-
-    @Id
-    private String technicalId;
-
     //Required
     //"An identifier for this line item, assigned by the buyer."
     private IdentifierType id;
@@ -23,5 +20,5 @@ public class LineItem {
     private Price price;
 
     //Required
-    private Item item;
+    private ItemRef item;
 }

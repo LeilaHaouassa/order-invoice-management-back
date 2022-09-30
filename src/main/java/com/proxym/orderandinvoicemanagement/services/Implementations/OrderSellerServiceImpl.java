@@ -6,8 +6,6 @@ import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderResponseDTO;
 import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderResponseSimpleDTO;
 import com.proxym.orderandinvoicemanagement.exception.IllegalOperationException;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IndicatorType;
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
-import com.proxym.orderandinvoicemanagement.model.config.Settings;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.Order;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderResponse;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderResponseSimple;
@@ -22,27 +20,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class OrderSellerServiceImpl implements IOrderSellerService {
 
     @Autowired
-    public ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Autowired
-    public OrderRepository orderRepository;
+    private OrderRepository orderRepository;
     @Autowired
-    public IOrderService orderService;
+    private IOrderService orderService;
     @Autowired
-    public OrderResponseRepository orderResponseRepository;
+    private OrderResponseRepository orderResponseRepository;
     @Autowired
-    public OrderResponseSimpleRepository orderResponseSimpleRepository;
+    private OrderResponseSimpleRepository orderResponseSimpleRepository;
+    @Autowired
+    private PartyCustomMappingServiceImpl customMappingOfParty;
 
 
     @Override
-    public Set<OrderDTO> getAllReceivedOrders(Party party) {
-        Set<Order> orders =orderRepository.findAllBySellerSupplierParty_Party(party);
+    public Set<OrderDTO> getAllReceivedOrders(String technicalId) {
+        Set<Order> orders = orderRepository.findAllBySellerSupplierParty_Party_TechnicalId(technicalId);
         return orderService.convertSetToDTO(orders);
     }
 
@@ -54,6 +53,7 @@ public class OrderSellerServiceImpl implements IOrderSellerService {
         orderResponseSimpleDTO.setIssueDate(orderService.getCurrentDate());
         orderResponseSimpleDTO.setIssueTime(orderService.getCurrentTime());
         OrderResponseSimple orderResponseSimple = modelMapper.map(orderResponseSimpleDTO,OrderResponseSimple.class);
+        orderResponseSimple = customMappingOfParty.mappingForOrderResponseSimple(orderResponseSimpleDTO,orderResponseSimple);
         try {
             orderResponseSimple =orderResponseSimpleRepository.insert(orderResponseSimple);
         }catch (Exception e){
@@ -75,6 +75,7 @@ public class OrderSellerServiceImpl implements IOrderSellerService {
         orderResponseDTO.setIssueDate(orderService.getCurrentDate());
         orderResponseDTO.setIssueTime(orderService.getCurrentTime());
         OrderResponse orderResponse = modelMapper.map(orderResponseDTO,OrderResponse.class);
+        orderResponse = customMappingOfParty.mappingForOrderResponse(orderResponseDTO,orderResponse);
         try {
             orderResponse = orderResponseRepository.insert(orderResponse);
         } catch (Exception e){
@@ -98,6 +99,7 @@ public class OrderSellerServiceImpl implements IOrderSellerService {
         orderResponseSimpleDTO.setIssueTime(orderService.getCurrentTime());
         orderResponseSimpleDTO.setIssueDate(orderService.getCurrentDate());
         OrderResponseSimple orderResponseSimple = modelMapper.map(orderResponseSimpleDTO,OrderResponseSimple.class);
+        orderResponseSimple = customMappingOfParty.mappingForOrderResponseSimple(orderResponseSimpleDTO,orderResponseSimple);
         try {
             orderResponseSimple = orderResponseSimpleRepository.insert(orderResponseSimple);
         }catch (Exception e){

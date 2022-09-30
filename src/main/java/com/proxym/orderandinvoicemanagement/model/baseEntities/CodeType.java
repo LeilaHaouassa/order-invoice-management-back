@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-
 public class CodeType {
     //Required
     private String codeContent;

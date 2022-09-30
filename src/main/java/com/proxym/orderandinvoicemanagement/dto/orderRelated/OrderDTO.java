@@ -10,7 +10,9 @@ import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderStatus;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -23,6 +25,7 @@ public class OrderDTO {
 //    private Set<TextType> note = new HashSet<>();
     private CustomerPartyDTO buyerCustomerParty;
     private SupplierPartyDTO sellerSupplierParty;
-    private OrderLineDTO orderLine;
+    private Set<OrderLineDTO> orderLine = new HashSet<>();
     private MonetaryTotalDTO anticipatedMonetaryTotal;
+    private List<Object> historyStack = new ArrayList<>();
 }

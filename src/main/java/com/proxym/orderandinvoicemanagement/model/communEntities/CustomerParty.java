@@ -1,21 +1,14 @@
 package com.proxym.orderandinvoicemanagement.model.communEntities;
 
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.PartyRef;
+import lombok.Data;
 
 //A class to describe a customer party.
-@Document
+@Data
 public class CustomerParty {
-
-    @Id
-    private String technicalId;
-
     //"The customer party itself."
-    private Party party;
-
-
-
+    private PartyRef party;
 }
 
 

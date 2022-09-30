@@ -1,13 +1,8 @@
 package com.proxym.orderandinvoicemanagement.services.Implementations;
 
-import com.mongodb.MongoWriteException;
 import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
-import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
-import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
-import com.proxym.orderandinvoicemanagement.model.communEntities.PartyIdentification;
-import com.proxym.orderandinvoicemanagement.model.communEntities.PartyName;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
 import com.proxym.orderandinvoicemanagement.repositories.PartyRepository;
 import com.proxym.orderandinvoicemanagement.services.IPartyService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +18,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PartyServiceImpl implements IPartyService {
     @Autowired
-    public PartyRepository partyRepository;
+    private PartyRepository partyRepository;
     @Autowired
-    public ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
 
     @Override
@@ -72,6 +67,9 @@ public class PartyServiceImpl implements IPartyService {
 
     @Override
     public PartyDTO updateParty(String id, PartyDTO partyDTO) throws ResourceNotFoundException, IllegalArgumentException {
+        //Todo u need, after each change in the party, to look for occurences of that party in order documents and update them.
+        //todo look for other solution bcz solution bay5a and doesnt make sense
+        //todo UNLESS we dont need to update then hurraaaaaaaay!!
         Party partyToUpdate = partyRepository.findPartyByTechnicalId(id).orElse(null);
         if (partyToUpdate == null) {
             throw new ResourceNotFoundException("Retrieving Failed: Party with Id " + id + " not found.");

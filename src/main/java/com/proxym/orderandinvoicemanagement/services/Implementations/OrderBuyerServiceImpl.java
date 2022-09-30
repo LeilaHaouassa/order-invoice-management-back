@@ -5,7 +5,9 @@ import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderChangeDTO;
 import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderDTO;
 import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderReferenceDTO;
 import com.proxym.orderandinvoicemanagement.exception.IllegalOperationException;
-import com.proxym.orderandinvoicemanagement.model.communEntities.Party;
+import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.PartyRef;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.Order;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderCancellation;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderChange;
@@ -13,6 +15,7 @@ import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderStatus;
 import com.proxym.orderandinvoicemanagement.repositories.OrderCancellationRepository;
 import com.proxym.orderandinvoicemanagement.repositories.OrderChangeRepository;
 import com.proxym.orderandinvoicemanagement.repositories.OrderRepository;
+import com.proxym.orderandinvoicemanagement.repositories.PartyRepository;
 import com.proxym.orderandinvoicemanagement.services.IOrderBuyerService;
 import com.proxym.orderandinvoicemanagement.services.IOrderService;
 import org.modelmapper.ModelMapper;
@@ -27,15 +30,17 @@ import java.util.Set;
 public class OrderBuyerServiceImpl implements IOrderBuyerService {
 
     @Autowired
-    public ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Autowired
-    public OrderRepository orderRepository;
+    private OrderRepository orderRepository;
     @Autowired
-    public IOrderService orderService;
+    private IOrderService orderService;
     @Autowired
-    public OrderCancellationRepository orderCancellationRepository;
+    private OrderCancellationRepository orderCancellationRepository;
     @Autowired
-    public OrderChangeRepository orderChangeRepository;
+    private OrderChangeRepository orderChangeRepository;
+    @Autowired
+    private PartyCustomMappingServiceImpl customMappingOfParty;
 
     @Override
     public Set<OrderDTO> getAll() {
@@ -44,18 +49,20 @@ public class OrderBuyerServiceImpl implements IOrderBuyerService {
     }
 
     @Override
-    public Set<OrderDTO> getAllSentOrders(Party party) {
-        Set<Order> orders = orderRepository.findAllByBuyerCustomerParty_Party(party);
+    public Set<OrderDTO> getAllSentOrders(String technicalId) {
+        Set<Order> orders = orderRepository.findAllByBuyerCustomerParty_Party_TechnicalId(technicalId);
         return orderService.convertSetToDTO(orders);
     }
 
+    //TODO check if I need to save or update the entity party after saving the order
     @Override
     public OrderChangeDTO changeOrder(OrderChangeDTO orderChangeDTO) throws IllegalArgumentException, IllegalOperationException {
         Order order = orderService.getOrderIfOperationIsLegal(orderChangeDTO.getOrderReference().getTechnicalId());
-        order.setStatus(OrderStatus.NEGOTIATING);
+        order.setStatus(OrderStatus.CHANGED);
         orderChangeDTO.setIssueDate(orderService.getCurrentDate());
         orderChangeDTO.setIssueTime(orderService.getCurrentTime());
         OrderChange orderChange = modelMapper.map(orderChangeDTO,OrderChange.class);
+        orderChange = customMappingOfParty.mappingForOrderChange(orderChangeDTO,orderChange);
         try {
             orderChange = orderChangeRepository.insert(orderChange);
         }catch (Exception exception){
@@ -78,6 +85,7 @@ public class OrderBuyerServiceImpl implements IOrderBuyerService {
         orderCancellationDTO.setIssueTime(orderService.getCurrentTime());
 
         OrderCancellation orderCancellation = modelMapper.map(orderCancellationDTO,OrderCancellation.class);
+        orderCancellation= customMappingOfParty.mappingForOrderCancellation(orderCancellationDTO,orderCancellation);
         try {
             orderCancellation = orderCancellationRepository.insert(orderCancellation);
         } catch (Exception exception) {
@@ -94,11 +102,12 @@ public class OrderBuyerServiceImpl implements IOrderBuyerService {
 
 
     @Override
-    public OrderDTO placeOrder(OrderDTO orderDTO) throws IllegalArgumentException {
+    public OrderDTO placeOrder(OrderDTO orderDTO) throws IllegalArgumentException, ResourceNotFoundException {
         orderDTO.setIssueDate(orderService.getCurrentDate());
         orderDTO.setIssueTime(orderService.getCurrentTime());
         orderDTO.setStatus(OrderStatus.PENDING);
         Order order = modelMapper.map(orderDTO,Order.class);
+        order = customMappingOfParty.mappingForOrder(orderDTO,order);
         try {
             order = orderRepository.insert(order);
         } catch (Exception exception) {
@@ -106,6 +115,7 @@ public class OrderBuyerServiceImpl implements IOrderBuyerService {
         }
         return modelMapper.map(order,OrderDTO.class);
     }
+
 
     @Override
     public void acceptOrder(String technicalId) throws IllegalOperationException {

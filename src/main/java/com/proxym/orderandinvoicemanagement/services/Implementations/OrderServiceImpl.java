@@ -5,9 +5,12 @@ import com.proxym.orderandinvoicemanagement.exception.IllegalOperationException;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Party.PartyRef;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.Order;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderStatus;
 import com.proxym.orderandinvoicemanagement.repositories.OrderRepository;
+import com.proxym.orderandinvoicemanagement.repositories.PartyRepository;
 import com.proxym.orderandinvoicemanagement.services.IOrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +26,11 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements IOrderService {
 
     @Autowired
-    public ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Autowired
-    public OrderRepository orderRepository;
+    private OrderRepository orderRepository;
+    @Autowired
+    private PartyRepository partyRepository;
 
     @Override
     public Set<OrderDTO> convertSetToDTO(Set<Order> orders) {

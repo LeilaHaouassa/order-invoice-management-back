@@ -28,19 +28,19 @@ public class PartyController {
         return  ResponseEntity.ok().body(partyService.getPartyById(partyId));
     }
 
-    @PostMapping("/add")
+    @PostMapping("/new")
     public ResponseEntity<PartyDTO> createParty(@RequestBody PartyDTO partyDTO)  {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/parties/add").toUriString());
         return ResponseEntity.created(uri).body(partyService.createParty(partyDTO));
     }
 
-    @PostMapping("/update/{partyId}")
+    @PutMapping ("/{partyId}")
     public ResponseEntity<PartyDTO> updateParty(@PathVariable String partyId,@RequestBody PartyDTO partyDTO) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/parties/{partyId}/update").toUriString());
         return ResponseEntity.created(uri).body(partyService.updateParty(partyId,partyDTO));
     }
 
-    @GetMapping("/delete/{partyId}")
+    @DeleteMapping("/{partyId}")
     public ResponseEntity<?> deleteParty(@PathVariable String partyId){
         partyService.deleteParty(partyId);
         return ResponseEntity.ok("Party with Id " + partyId + "is removed successfully");

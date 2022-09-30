@@ -8,9 +8,11 @@ package com.proxym.orderandinvoicemanagement.model.orderEntities;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 //"A class to define a reference to an Order."
+@Data
 public class OrderReference {
 
     //Id of referenced order

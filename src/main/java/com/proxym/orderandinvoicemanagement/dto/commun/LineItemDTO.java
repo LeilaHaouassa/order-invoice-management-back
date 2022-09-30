@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class LineItemDTO {
 
-    private String technicalId;
     private IdentifierType id;
     private QuantityType quantity;
     private PriceDTO price;

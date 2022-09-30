@@ -21,6 +21,7 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     private RoleService roleService;
 
+
     @Override
     public void run(String... args) throws Exception {
 

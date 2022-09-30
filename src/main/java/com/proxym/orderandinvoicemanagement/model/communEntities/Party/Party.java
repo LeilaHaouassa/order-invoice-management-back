@@ -1,8 +1,9 @@
-package com.proxym.orderandinvoicemanagement.model.communEntities;
+package com.proxym.orderandinvoicemanagement.model.communEntities.Party;
 
 
 import com.proxym.orderandinvoicemanagement.model.baseEntities.CodeType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
+import com.proxym.orderandinvoicemanagement.model.communEntities.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class  Party {
     private Address postalAddress ;
 
     //"The primary contact for this party.
-    private Contact  contact;
+    private Contact contact;
 
     //"The financial account associated with this party."
     private FinancialAccount financialAccount ;

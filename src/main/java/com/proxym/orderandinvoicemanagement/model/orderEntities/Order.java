@@ -42,6 +42,7 @@ public class Order {
 //    private Set<TextType> note = new HashSet<>();
 
     //"The buyer."  //Required
+
     private CustomerParty buyerCustomerParty;
 
     //"The seller."  //Required

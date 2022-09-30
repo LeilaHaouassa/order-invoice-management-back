@@ -1,4 +1,4 @@
-package com.proxym.orderandinvoicemanagement.model.communEntities;
+package com.proxym.orderandinvoicemanagement.model.communEntities.Item;
 
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
 import org.springframework.data.annotation.Id;
