@@ -23,4 +23,6 @@ public class ItemController {
     public ResponseEntity<Set<Item>> getAll(){
         return ResponseEntity.ok().body(itemService.getAll());
     }
+
+
 }

@@ -1,12 +1,13 @@
 package com.proxym.orderandinvoicemanagement.services;
 
-import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderDTO;
+import com.proxym.orderandinvoicemanagement.dto.orderRelated.*;
 import com.proxym.orderandinvoicemanagement.exception.IllegalOperationException;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.Order;
+import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderResponse;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,4 +31,13 @@ public interface IOrderService {
 
     Order getOrderIfOperationIsLegal(String technicalId) throws IllegalOperationException;
 
+    OrderDTO assignBuyerToOrderDTOByPartyId(String buyerPartyId, OrderDTO orderDTO);
+
+    OrderChangeDTO assignBuyerToOrderChangeDTOByPartyId(String buyerPartyId, OrderChangeDTO orderChangeDTO);
+
+    OrderCancellationDTO assignBuyerToOrderCancellationDTOByPartyId(String buyerPartyId, OrderCancellationDTO orderCancellationDTO);
+
+    OrderResponseSimpleDTO assignBuyerToOrderResponseSimpleDTOByPartyId(String buyerPartyId, OrderResponseSimpleDTO orderResponseSimpleDTO);
+
+    OrderResponseDTO assignBuyerToOrderResponseDTOByPartyId(String buyerPartyId, OrderResponseDTO orderResponseDTO);
 }

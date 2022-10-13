@@ -14,13 +14,13 @@ public interface IOrderBuyerService {
 
     Set<OrderDTO> getAllSentOrders(String technicalId);
 
-    OrderChangeDTO changeOrder(OrderChangeDTO orderChangeDTO) throws IllegalArgumentException, IllegalOperationException;
+    OrderChangeDTO changeOrder(String buyerPartyId,OrderChangeDTO orderChangeDTO) throws IllegalArgumentException, IllegalOperationException;
 
-    OrderCancellationDTO cancelOrder(OrderCancellationDTO orderCancellationDTO) throws IllegalArgumentException, IllegalOperationException;
+    OrderCancellationDTO cancelOrder(String buyerPartyId,OrderCancellationDTO orderCancellationDTO) throws IllegalArgumentException, IllegalOperationException;
 
-    OrderDTO placeOrder(OrderDTO order) throws IllegalArgumentException;
+    OrderDTO placeOrder(String buyerPartyId,OrderDTO order) throws IllegalArgumentException;
 
-    void acceptOrder(String technicalId) throws IllegalOperationException;
+    void acceptOrder(String orderTechnicalId) throws IllegalOperationException;
 
 
 

@@ -1,6 +1,7 @@
 package com.proxym.orderandinvoicemanagement.services.Implementations;
 
 import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyRefDTO;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
 import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
 import com.proxym.orderandinvoicemanagement.repositories.PartyRepository;
@@ -42,6 +43,18 @@ public class PartyServiceImpl implements IPartyService {
     public Set<PartyDTO> getAll() {
         List<Party> parties = partyRepository.findAll();
         return convertListToDTO(parties);
+    }
+
+    @Override
+    public Set<PartyRefDTO> getAllOtherParties(String callerPartyId) {
+        List<Party> parties = partyRepository.findAll();
+        Party excludedParty =  partyRepository.findPartyByTechnicalId(callerPartyId).orElse(null);
+        if (excludedParty == null) {
+            throw new ResourceNotFoundException("Retrieving Failed: Party with id " + callerPartyId + " not found");
+        }
+        parties.remove(excludedParty);
+        return parties.stream().map(party -> modelMapper.map(party, PartyRefDTO.class)).collect(Collectors.toSet());
+
     }
 
     @Override

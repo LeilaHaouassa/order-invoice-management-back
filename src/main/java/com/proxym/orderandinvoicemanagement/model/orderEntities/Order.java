@@ -63,6 +63,3 @@ public class Order {
         historyStack.add(obj);
     }
 }
-
-    //"The time, assigned by the sender, at which this document was issued."
-    //private TimeType issueTime ;

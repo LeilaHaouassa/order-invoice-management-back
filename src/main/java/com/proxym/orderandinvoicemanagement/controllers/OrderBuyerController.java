@@ -35,20 +35,20 @@ public class OrderBuyerController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<OrderDTO> placeOrder(@PathVariable("partyId") String partyId, @RequestBody OrderDTO orderDTO){
+    public ResponseEntity<OrderDTO> placeOrder(@PathVariable("partyId") String buyerPartyId, @RequestBody OrderDTO orderDTO){
         //TODO switch to created Http Response
         //URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/parties/{partyId}/customerSide/orders/send").build().toUriString());
-        return ResponseEntity.ok().body(orderBuyerService.placeOrder(orderDTO));
+        return ResponseEntity.ok().body(orderBuyerService.placeOrder(buyerPartyId,orderDTO));
     }
 
     @PutMapping
-    public ResponseEntity<OrderChangeDTO> changeOrder(@RequestBody OrderChangeDTO orderChangeDTO){
-        return ResponseEntity.ok().body(orderBuyerService.changeOrder(orderChangeDTO));
+    public ResponseEntity<OrderChangeDTO> changeOrder(@PathVariable("partyId") String buyerPartyId,@RequestBody OrderChangeDTO orderChangeDTO){
+        return ResponseEntity.ok().body(orderBuyerService.changeOrder(buyerPartyId, orderChangeDTO));
     }
 
     @PostMapping("/cancel")
-    public ResponseEntity<OrderCancellationDTO> cancelOrder(@RequestBody OrderCancellationDTO orderCancellationDTO){
-        return ResponseEntity.ok().body(orderBuyerService.cancelOrder(orderCancellationDTO));
+    public ResponseEntity<OrderCancellationDTO> cancelOrder(@PathVariable("partyId") String buyerPartyId,@RequestBody OrderCancellationDTO orderCancellationDTO){
+        return ResponseEntity.ok().body(orderBuyerService.cancelOrder(buyerPartyId, orderCancellationDTO));
     }
 
     @PostMapping("/accept")

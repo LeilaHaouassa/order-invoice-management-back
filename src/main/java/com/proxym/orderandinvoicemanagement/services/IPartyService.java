@@ -1,6 +1,7 @@
 package com.proxym.orderandinvoicemanagement.services;
 
 import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyRefDTO;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
 import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
 
@@ -10,6 +11,8 @@ import java.util.Set;
  public interface IPartyService {
 
      Set<PartyDTO> getAll();
+
+     Set<PartyRefDTO> getAllOtherParties(String callerPartyId);
 
      Party saveParty(Party party);
 

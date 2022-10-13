@@ -1,6 +1,8 @@
 package com.proxym.orderandinvoicemanagement.services.Implementations;
 
-import com.proxym.orderandinvoicemanagement.dto.orderRelated.OrderDTO;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyRefDTO;
+import com.proxym.orderandinvoicemanagement.dto.orderRelated.*;
 import com.proxym.orderandinvoicemanagement.exception.IllegalOperationException;
 import com.proxym.orderandinvoicemanagement.exception.ResourceNotFoundException;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
@@ -12,6 +14,7 @@ import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderStatus;
 import com.proxym.orderandinvoicemanagement.repositories.OrderRepository;
 import com.proxym.orderandinvoicemanagement.repositories.PartyRepository;
 import com.proxym.orderandinvoicemanagement.services.IOrderService;
+import com.proxym.orderandinvoicemanagement.services.IPartyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +33,7 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
-    private PartyRepository partyRepository;
+    private IPartyService partyService;
 
     @Override
     public Set<OrderDTO> convertSetToDTO(Set<Order> orders) {
@@ -65,7 +68,6 @@ public class OrderServiceImpl implements IOrderService {
             throw new ResourceNotFoundException("Retrieving Failed: Order with Id " + technicalId + " not found.");
         }
         return order;
-//        return modelMapper.map(order,OrderDTO.class);
     }
     @Override
     public Order getOrderIfOperationIsLegal(String technicalId) throws IllegalOperationException{
@@ -74,6 +76,46 @@ public class OrderServiceImpl implements IOrderService {
             throw new IllegalOperationException("Illegal Operation Attempted: No action is allowed after having the order accepted, rejected or canceled.");
         }
         return order;
+    }
+
+    @Override
+    public OrderDTO assignBuyerToOrderDTOByPartyId(String buyerPartyId, OrderDTO orderDTO) {
+        PartyDTO buyerParty = partyService.getPartyById(buyerPartyId);
+        PartyRefDTO buyerPartyRef = modelMapper.map(buyerParty, PartyRefDTO.class);
+        orderDTO.getBuyerCustomerParty().setParty(buyerPartyRef);
+        return orderDTO;
+    }
+
+    @Override
+    public OrderChangeDTO assignBuyerToOrderChangeDTOByPartyId(String buyerPartyId, OrderChangeDTO orderChangeDTO) {
+        PartyDTO buyerParty = partyService.getPartyById(buyerPartyId);
+        PartyRefDTO buyerPartyRef = modelMapper.map(buyerParty, PartyRefDTO.class);
+        orderChangeDTO.getBuyerCustomerParty().setParty(buyerPartyRef);
+        return orderChangeDTO;
+    }
+
+    @Override
+    public OrderCancellationDTO assignBuyerToOrderCancellationDTOByPartyId(String buyerPartyId, OrderCancellationDTO orderCancellationDTO) {
+        PartyDTO buyerParty = partyService.getPartyById(buyerPartyId);
+        PartyRefDTO buyerPartyRef = modelMapper.map(buyerParty, PartyRefDTO.class);
+        orderCancellationDTO.getBuyerCustomerParty().setParty(buyerPartyRef);
+        return orderCancellationDTO;
+    }
+
+    @Override
+    public OrderResponseSimpleDTO assignBuyerToOrderResponseSimpleDTOByPartyId(String buyerPartyId, OrderResponseSimpleDTO orderResponseSimpleDTO) {
+        PartyDTO buyerParty = partyService.getPartyById(buyerPartyId);
+        PartyRefDTO buyerPartyRef = modelMapper.map(buyerParty, PartyRefDTO.class);
+        orderResponseSimpleDTO.getBuyerCustomerParty().setParty(buyerPartyRef);
+        return orderResponseSimpleDTO;
+    }
+
+    @Override
+    public OrderResponseDTO assignBuyerToOrderResponseDTOByPartyId(String buyerPartyId, OrderResponseDTO orderResponseDTO) {
+        PartyDTO buyerParty = partyService.getPartyById(buyerPartyId);
+        PartyRefDTO buyerPartyRef = modelMapper.map(buyerParty, PartyRefDTO.class);
+        orderResponseDTO.getBuyerCustomerParty().setParty(buyerPartyRef);
+        return orderResponseDTO;
     }
 
 

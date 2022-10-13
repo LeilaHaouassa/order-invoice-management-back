@@ -2,6 +2,7 @@ package com.proxym.orderandinvoicemanagement.controllers;
 
 
 import com.proxym.orderandinvoicemanagement.dto.commun.PartyDTO;
+import com.proxym.orderandinvoicemanagement.dto.commun.PartyRefDTO;
 import com.proxym.orderandinvoicemanagement.services.IPartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class PartyController {
     @GetMapping("/{partyId}")
     public ResponseEntity<PartyDTO> getPartyByTechnicalId(@PathVariable String partyId) {
         return  ResponseEntity.ok().body(partyService.getPartyById(partyId));
+    }
+
+    @GetMapping("/{partyId}/others")
+    public ResponseEntity<Set<PartyRefDTO>> getAllOtherParties(@PathVariable String partyId){
+        return ResponseEntity.ok().body(partyService.getAllOtherParties(partyId));
     }
 
     @PostMapping("/new")
