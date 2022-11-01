@@ -7,6 +7,7 @@ import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
+import com.proxym.orderandinvoicemanagement.model.orderEntities.ActionType;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -24,4 +25,5 @@ public class OrderResponseDTO {
     private SupplierPartyDTO sellerSupplierParty;
     private Set<OrderLineDTO> orderLine = new HashSet<>();
     private MonetaryTotalDTO legalMonetaryTotal;
+    private ActionType actionType;
 }

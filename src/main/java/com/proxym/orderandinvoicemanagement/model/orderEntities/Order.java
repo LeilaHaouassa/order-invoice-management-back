@@ -29,6 +29,9 @@ public class Order {
     //Technical attribute to mark the status of the order
     private OrderStatus status;
 
+    //Technical attribute to mark the action associated with this document
+    private ActionType actionType= ActionType.SEND;
+
     //Required
     //"The date, assigned by the sender, on which this document was issued.",
     private DateType issueDate ;
@@ -56,6 +59,9 @@ public class Order {
     //"The total amount for the Order anticipated by the buyer."
     private MonetaryTotal anticipatedMonetaryTotal;
 
+    private String IdOfDocumentToNegotiateOver;
+
+    private String IdOfDocumentForOrderChange;
 
     private List<Object> historyStack = new ArrayList<>();
 

@@ -7,6 +7,7 @@ import com.proxym.orderandinvoicemanagement.model.baseEntities.DateType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.IdentifierType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
+import com.proxym.orderandinvoicemanagement.model.orderEntities.ActionType;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderStatus;
 import lombok.Data;
 
@@ -22,10 +23,12 @@ public class OrderDTO {
     private DateType issueDate ;
     private TimeType issueTime ;
     private OrderStatus status;
-//    private Set<TextType> note = new HashSet<>();
     private CustomerPartyDTO buyerCustomerParty;
     private SupplierPartyDTO sellerSupplierParty;
     private Set<OrderLineDTO> orderLine = new HashSet<>();
     private MonetaryTotalDTO anticipatedMonetaryTotal;
     private List<Object> historyStack = new ArrayList<>();
+    private ActionType actionType;
+    private String IdOfDocumentToNegotiateOver;
+    private String IdOfDocumentForOrderChange;
 }

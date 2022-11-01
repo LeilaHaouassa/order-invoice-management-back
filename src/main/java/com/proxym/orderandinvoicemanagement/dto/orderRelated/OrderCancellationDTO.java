@@ -8,6 +8,7 @@ import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TimeType;
 import com.proxym.orderandinvoicemanagement.model.communEntities.CustomerParty;
 import com.proxym.orderandinvoicemanagement.model.communEntities.SupplierParty;
+import com.proxym.orderandinvoicemanagement.model.orderEntities.ActionType;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.OrderReference;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ import java.util.Set;
 
 @Data
 public class OrderCancellationDTO {
+    private String technicalId;
     private IdentifierType id;
     private DateType issueDate ;
     private TimeType issueTime ;
@@ -23,4 +25,5 @@ public class OrderCancellationDTO {
     private Set<OrderReferenceDTO> orderReference = new HashSet<>();
     private CustomerPartyDTO buyerCustomerParty;
     private SupplierPartyDTO sellerSupplierParty;
+    private ActionType actionType;
 }

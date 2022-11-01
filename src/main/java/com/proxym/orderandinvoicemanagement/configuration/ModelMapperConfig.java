@@ -4,6 +4,7 @@ package com.proxym.orderandinvoicemanagement.configuration;
 import com.proxym.orderandinvoicemanagement.dto.commun.*;
 import com.proxym.orderandinvoicemanagement.dto.orderRelated.*;
 import com.proxym.orderandinvoicemanagement.model.communEntities.CustomerParty;
+import com.proxym.orderandinvoicemanagement.model.communEntities.Item.Item;
 import com.proxym.orderandinvoicemanagement.model.communEntities.Party.Party;
 import com.proxym.orderandinvoicemanagement.model.communEntities.SupplierParty;
 import com.proxym.orderandinvoicemanagement.model.orderEntities.*;
@@ -23,9 +24,6 @@ public class ModelMapperConfig {
         modelMapper.typeMap(PartyDTO.class, Party.class).addMappings(mapper ->
                 mapper.skip(Party::setTechnicalId)
         );
-        modelMapper.typeMap(OrderDTO.class, Order.class).addMappings(mapper ->
-                    mapper.skip(Order::setTechnicalId)
-        );
         modelMapper.typeMap(OrderChangeDTO.class, OrderChange.class).addMappings(mapper ->
                 mapper.skip(OrderChange::setTechnicalId)
         );
@@ -38,11 +36,8 @@ public class ModelMapperConfig {
         modelMapper.typeMap(OrderResponseDTO.class, OrderResponse.class).addMappings(mapper ->
                 mapper.skip(OrderResponse::setTechnicalId)
         );
-        modelMapper.typeMap(CustomerPartyDTO.class, CustomerParty.class).addMappings(mapper ->
-                mapper.skip(CustomerParty::setParty)
-        );
-        modelMapper.typeMap(SupplierPartyDTO.class, SupplierParty.class).addMappings(mapper ->
-                mapper.skip(SupplierParty::setParty)
+        modelMapper.typeMap(ItemDTO.class, Item.class).addMappings(mapper ->
+                mapper.skip(Item::setTechnicalId)
         );
 
         return modelMapper;

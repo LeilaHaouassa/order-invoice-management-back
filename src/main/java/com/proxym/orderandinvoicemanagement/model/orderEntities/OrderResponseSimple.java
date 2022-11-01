@@ -52,5 +52,8 @@ public class OrderResponseSimple {
     //"The seller."
     private SupplierParty sellerSupplierParty;
 
+    //Technical attribute to mark the action associated with this document
+    private ActionType actionType;
+
 
 }

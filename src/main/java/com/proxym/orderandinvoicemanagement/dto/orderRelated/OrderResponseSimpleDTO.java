@@ -3,6 +3,7 @@ package com.proxym.orderandinvoicemanagement.dto.orderRelated;
 import com.proxym.orderandinvoicemanagement.dto.commun.CustomerPartyDTO;
 import com.proxym.orderandinvoicemanagement.dto.commun.SupplierPartyDTO;
 import com.proxym.orderandinvoicemanagement.model.baseEntities.*;
+import com.proxym.orderandinvoicemanagement.model.orderEntities.ActionType;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -19,4 +20,5 @@ public class OrderResponseSimpleDTO {
     private Set<TextType> rejectionNote = new HashSet<>();
     private CustomerPartyDTO buyerCustomerParty;
     private SupplierPartyDTO sellerSupplierParty;
+    private ActionType actionType;
 }

@@ -56,6 +56,9 @@ public class OrderChange {
     // item being ordered."
     private Set<OrderLine> orderLine = new HashSet<>();
 
+    //Technical attribute to mark the action associated with this document
+    private ActionType actionType= ActionType.CHANGE;
+
     //"The amount of change to the total cost of the order anticipated by the buyer."
     private MonetaryTotal anticipatedMonetaryTotal;
 

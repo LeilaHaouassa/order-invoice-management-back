@@ -1,6 +1,7 @@
 package com.proxym.orderandinvoicemanagement.model.communEntities.Item;
 
 import com.proxym.orderandinvoicemanagement.model.baseEntities.TextType;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 // with optional subsidiary descriptions of any number of
 // actual instances of the type."
 @Document
+@Data
 public class Item {
     @Id
     private String technicalId;

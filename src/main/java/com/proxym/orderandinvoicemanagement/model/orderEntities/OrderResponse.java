@@ -55,6 +55,9 @@ public class OrderResponse {
     //"The seller."
     private SupplierParty sellerSupplierParty;
 
+    //Technical attribute to mark the action associated with this document
+    private ActionType actionType;
+
 
     //"A line associated with a line in the Catalogue and specifying a kind of
     // item being ordered."

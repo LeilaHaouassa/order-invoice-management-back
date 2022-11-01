@@ -7,4 +7,8 @@ public class PartyRefDTO {
     private String technicalId;
     private PartyIdentificationDTO partyIdentification;
     private PartyNameDTO partyName;
+    private AddressDTO postalAddress;
+    private ContactDTO contact;
+    private FinancialAccountDTO financialAccount;
+
 }

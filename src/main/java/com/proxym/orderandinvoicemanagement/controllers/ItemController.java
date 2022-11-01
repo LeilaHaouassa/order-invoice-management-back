@@ -1,13 +1,11 @@
 package com.proxym.orderandinvoicemanagement.controllers;
 
+import com.proxym.orderandinvoicemanagement.dto.commun.ItemDTO;
 import com.proxym.orderandinvoicemanagement.model.communEntities.Item.Item;
 import com.proxym.orderandinvoicemanagement.services.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -24,5 +22,9 @@ public class ItemController {
         return ResponseEntity.ok().body(itemService.getAll());
     }
 
+    @PostMapping
+    public ResponseEntity<ItemDTO> createItem(@RequestBody ItemDTO itemDTO){
+        return ResponseEntity.ok().body(itemService.createItem(itemDTO));
+    }
 
 }

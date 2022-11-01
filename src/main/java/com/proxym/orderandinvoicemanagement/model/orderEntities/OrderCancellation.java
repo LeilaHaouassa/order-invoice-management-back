@@ -28,6 +28,9 @@ public class OrderCancellation {
     //"The date, assigned by the sender, on which this document was issued."
     private DateType issueDate ;
 
+    //Technical attribute to mark the action associated with this document
+    private ActionType actionType= ActionType.CANCEL;
+
     //Required
     //"The general reason for cancellation of the referenced order."
     private Set<TextType> cancellationNote = new HashSet<>();

@@ -19,17 +19,15 @@ public interface IOrderService {
 
     Set<OrderDTO> convertSetToDTO(Set<Order> orders);
 
-    Set<OrderDTO> convertListToDTO(List<Order> list);
-
     TimeType getCurrentTime();
 
     DateType getCurrentDate();
 
-    Order saveOrder(Order order);
+    List<Object> getHistory(String technicalId);
 
-    Order getOrderByTechnicalId(String technicalId) throws ResourceNotFoundException;
+    OrderReferenceDTO assignRestOfOrderRefData(OrderReferenceDTO ref, Order order) ;
 
-    Order getOrderIfOperationIsLegal(String technicalId) throws IllegalOperationException;
+    OrderDTO getOrderByTechnicalId(String technicalId) throws ResourceNotFoundException;
 
     OrderDTO assignBuyerToOrderDTOByPartyId(String buyerPartyId, OrderDTO orderDTO);
 
@@ -37,7 +35,7 @@ public interface IOrderService {
 
     OrderCancellationDTO assignBuyerToOrderCancellationDTOByPartyId(String buyerPartyId, OrderCancellationDTO orderCancellationDTO);
 
-    OrderResponseSimpleDTO assignBuyerToOrderResponseSimpleDTOByPartyId(String buyerPartyId, OrderResponseSimpleDTO orderResponseSimpleDTO);
+    OrderResponseSimpleDTO assignSellerToOrderResponseSimpleDTOByPartyId(String sellerPartyId, OrderResponseSimpleDTO orderResponseSimpleDTO);
 
-    OrderResponseDTO assignBuyerToOrderResponseDTOByPartyId(String buyerPartyId, OrderResponseDTO orderResponseDTO);
+    OrderResponseDTO assignSellerToOrderResponseDTOByPartyId(String sellerPartyId, OrderResponseDTO orderResponseDTO);
 }
