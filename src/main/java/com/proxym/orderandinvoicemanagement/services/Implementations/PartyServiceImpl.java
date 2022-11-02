@@ -80,9 +80,6 @@ public class PartyServiceImpl implements IPartyService {
 
     @Override
     public PartyDTO updateParty(String id, PartyDTO partyDTO) throws ResourceNotFoundException, IllegalArgumentException {
-        //Todo u need, after each change in the party, to look for occurences of that party in order documents and update them.
-        //todo look for other solution bcz solution bay5a and doesnt make sense
-        //todo UNLESS we dont need to update then hurraaaaaaaay!!
         Party partyToUpdate = partyRepository.findPartyByTechnicalId(id).orElse(null);
         if (partyToUpdate == null) {
             throw new ResourceNotFoundException("Retrieving Failed: Party with Id " + id + " not found.");

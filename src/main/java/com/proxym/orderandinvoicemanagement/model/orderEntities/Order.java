@@ -63,6 +63,8 @@ public class Order {
 
     private String IdOfDocumentForOrderChange;
 
+    private String IdOfDocumentForInvoice;
+
     private List<Object> historyStack = new ArrayList<>();
 
     public void addToHistoryStack(Object obj){

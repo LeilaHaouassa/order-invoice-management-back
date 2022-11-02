@@ -31,4 +31,5 @@ public class OrderDTO {
     private ActionType actionType;
     private String IdOfDocumentToNegotiateOver;
     private String IdOfDocumentForOrderChange;
+    private String IdOfDocumentForInvoice;
 }

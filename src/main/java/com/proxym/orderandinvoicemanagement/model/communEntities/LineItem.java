@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 public class LineItem {
     //Required
     //"An identifier for this line item, assigned by the buyer."
-    @Indexed(unique = true)
+    //@Indexed(unique = true)
     private IdentifierType id;
 
     //"The quantity of items associated with this line item."

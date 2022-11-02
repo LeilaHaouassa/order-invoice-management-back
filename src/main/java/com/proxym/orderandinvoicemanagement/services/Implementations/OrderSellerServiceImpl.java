@@ -89,13 +89,14 @@ public class OrderSellerServiceImpl implements IOrderSellerService {
         try {
             orderResponse = orderResponseRepository.insert(orderResponse);
         } catch (Exception e){
-            throw new IllegalArgumentException("Invalid Input: Id of order response is already taken. Please provide new value.",e);
+            throw new IllegalArgumentException("Invalid Input: Id of order response or Id of an orderLine is already taken. Please provide new value.",e);
         }
         OrderResponse finalOrderResponse = orderResponse;
         orders.forEach(order -> {
             order.setStatus(OrderStatus.NEGOTIATING);
             order.addToHistoryStack(finalOrderResponse);
             order.setIdOfDocumentForOrderChange(finalOrderResponse.getTechnicalId());
+            order.setIdOfDocumentForInvoice(finalOrderResponse.getTechnicalId());
             orderRepository.save(order);
         });
         return orderService.convertSetToDTO(orders);

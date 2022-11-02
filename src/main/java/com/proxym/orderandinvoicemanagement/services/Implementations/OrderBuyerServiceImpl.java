@@ -73,6 +73,7 @@ public class OrderBuyerServiceImpl implements IOrderBuyerService {
         }
         order.addToHistoryStack(orderChange);
         order.setIdOfDocumentToNegotiateOver(orderChange.getTechnicalId());
+        order.setIdOfDocumentForInvoice(orderChange.getTechnicalId());
         order = orderRepository.save(order);
         return modelMapper.map(order,OrderDTO.class);
     }
@@ -130,6 +131,7 @@ public class OrderBuyerServiceImpl implements IOrderBuyerService {
             throw new IllegalArgumentException("Invalid Input: Id of order is already taken. Please provide new value for it.", exception);
         }
         order.setIdOfDocumentToNegotiateOver(order.getTechnicalId());
+        order.setIdOfDocumentForInvoice((order.getTechnicalId()));
         order = orderRepository.save(order);
         return modelMapper.map(order,OrderDTO.class);
     }
