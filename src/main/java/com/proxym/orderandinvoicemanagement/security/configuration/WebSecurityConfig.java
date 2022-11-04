@@ -5,6 +5,7 @@ import com.proxym.orderandinvoicemanagement.security.AuthEntryPointJwt;
 import com.proxym.orderandinvoicemanagement.security.filter.CustomAuthenticationFilter;
 import com.proxym.orderandinvoicemanagement.security.filter.CustomAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import static org.springframework.http.HttpMethod.GET;
 
@@ -42,13 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter  customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
-        customAuthenticationFilter.setFilterProcessesUrl("/api/auth/login");
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.csrf().disable();
-        http.cors().disable();
+        customAuthenticationFilter.setFilterProcessesUrl("/api/v1/auth/login");
         http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/**").permitAll();
-        http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/auth/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/v1/**").hasAnyAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);

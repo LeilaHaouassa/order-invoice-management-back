@@ -18,18 +18,4 @@ public class UserController {
     public ResponseEntity<Set<CustomUser>> getAllUsers(){
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
-
-//    @PostMapping("/add")
-//    public ResponseEntity<CustomUser> saveUser(@RequestBody UserPayload user ){
-//        //The following line is just to get the uri from the path
-//        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/users/add").toUriString());
-//        return ResponseEntity.created(uri).body(userService.saveUser(user));
-//    }
-
-
-
-
-
-
 }
-

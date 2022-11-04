@@ -15,7 +15,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/auth")
+@CrossOrigin(origins ={"http://localhost.localdomain:3000"})
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     @Autowired
