@@ -6,6 +6,8 @@ import com.proxym.orderandinvoicemanagement.services.ISettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 
 @Service
 public class SettingsServiceImpl implements ISettingsService {
@@ -14,12 +16,16 @@ public class SettingsServiceImpl implements ISettingsService {
     private SettingsRepository settingsRepository;
 
     @Override
-    public Settings getSettings() {
-        return settingsRepository.findById("1ID").orElse(null);
+    public Boolean getSettingsBool() {
+        return Objects.requireNonNull(settingsRepository.findById("1ID").orElse(null)).getResponseToBuyerIsRequiredWhenAcceptingOrder();
     }
 
     @Override
-    public Settings changeSettings(Settings settings) {
-        return settingsRepository.save(settings);
+    public Boolean changeSettings(Boolean settingsBool) {
+        Settings settings = settingsRepository.findById("1ID").orElse(null);
+        assert settings != null;
+        settings.setResponseToBuyerIsRequiredWhenAcceptingOrder(settingsBool);
+        settingsRepository.save(settings);
+        return settings.getResponseToBuyerIsRequiredWhenAcceptingOrder();
     }
 }

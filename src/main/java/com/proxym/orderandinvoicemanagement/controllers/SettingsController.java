@@ -20,12 +20,12 @@ public class SettingsController {
     private ISettingsService settingsService;
 
     @GetMapping
-    public Settings getSettings(){
-        return settingsService.getSettings();
+    public Boolean getSettings(){
+        return settingsService.getSettingsBool();
     }
 
     @PostMapping
-    public Settings changeSettings(@RequestBody Settings settings){
+    public Boolean changeSettings(@RequestBody Boolean settings){
         return settingsService.changeSettings(settings);
     }
 }

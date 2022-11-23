@@ -24,6 +24,7 @@ import java.util.Map;
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 //After making sure the user is authorized and provide them with a token, comes the role of this filter.
@@ -43,9 +44,9 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
                     String email = decodedJWT.getSubject();
-                    String role = decodedJWT.getClaim("role").asString();
+                    String[] role = decodedJWT.getClaim("role").asArray(String.class);
                     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                    authorities.add(new SimpleGrantedAuthority(role));
+                    authorities.add(new SimpleGrantedAuthority(role[0]));
 
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(email, null, authorities);
@@ -54,7 +55,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 } catch (Exception exception) {
                     log.error("Error logging in: {}", exception.getMessage());
                     response.setHeader("error", exception.getMessage());
-                    response.setStatus(FORBIDDEN.value());
+                    response.setStatus(UNAUTHORIZED.value());
                     //response.sendError(FORBIDDEN.value());
                     Map<String, String> errors = new HashMap<>();
                     errors.put("error_message", exception.getMessage());

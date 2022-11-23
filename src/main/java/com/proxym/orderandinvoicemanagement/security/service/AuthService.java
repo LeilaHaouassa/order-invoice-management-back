@@ -62,11 +62,12 @@ public class AuthService {
                 String email = decodedJWT.getSubject();
                 CustomUser user = userService.getUserByEmail(email);
                  //roles =  user.getRoles().stream().map(Role::getName).collect(Collectors.toList());
+                String[] roles= {user.getRole().getName().toString()};
                 String access_token = JWT.create()
                         .withSubject(user.getEmail())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 5 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
-                        .withClaim("role",user.getRole().getName().toString())
+                        .withClaim("role", Arrays.asList(roles))
                         .sign(algorithm);
                 Map<String,String> tokens = new HashMap<>();
                 tokens.put("access_token",access_token);

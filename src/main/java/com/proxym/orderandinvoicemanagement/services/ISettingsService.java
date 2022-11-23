@@ -1,11 +1,11 @@
 package com.proxym.orderandinvoicemanagement.services;
 
-import com.proxym.orderandinvoicemanagement.model.config.Settings;
 
+import com.proxym.orderandinvoicemanagement.model.config.Settings;
 
 public interface ISettingsService {
 
-    Settings getSettings();
+    Boolean getSettingsBool();
 
-    Settings changeSettings(Settings settings);
+    Boolean changeSettings(Boolean settings);
 }

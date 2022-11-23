@@ -52,9 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         customAuthenticationFilter.setFilterProcessesUrl("/api/v1/auth/login");
         http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/**").permitAll();
+        //http.authorizeRequests().antMatchers("/**").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/auth/**").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/v1/**").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers( "/api/v1/**").hasAnyAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
